@@ -60,7 +60,11 @@ feature = """{
 
 for lasfile in lasfiles:
     # check_output requires Python 2.7
-    text = subprocess.check_output(["pdal", "info", "--metadata", lasfile])
+    try:
+        text = subprocess.check_output(["pdal", "info", "--metadata", lasfile])
+    except subprocess.CalledProcessError as err:
+        print("PDAL failed on file %s: %s" % (lasfile, err), file=sys.stderr)
+        continue
     meta = json.loads(text)
     meta = meta['metadata']
     meta['filename'] = lasfile
