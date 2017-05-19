@@ -18,11 +18,14 @@
 # Author: Vaclav Petras
 
 
+from __future__ import print_function
+
 import sys
 import subprocess
 from os import listdir
 from os.path import isfile, join
 import json
+
 
 path = sys.argv[1]
 
@@ -56,6 +59,7 @@ feature = """{
 """
 
 for lasfile in lasfiles:
+    # check_output requires Python 2.7
     text = subprocess.check_output(["pdal", "info", "--metadata", lasfile])
     meta = json.loads(text)
     meta = meta['metadata']
@@ -64,4 +68,4 @@ for lasfile in lasfiles:
 
 geojson += """]}"""
 
-print geojson
+print(geojson)
