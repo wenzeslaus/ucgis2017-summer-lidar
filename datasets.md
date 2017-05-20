@@ -26,6 +26,8 @@ Size: 485MB
 
 Number of tiles: 15
 
+Representative tile: 10121256.las
+
 ## WhiteSands
 
 EPSG:6342
