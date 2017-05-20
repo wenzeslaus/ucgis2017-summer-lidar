@@ -46,3 +46,11 @@ Set a computation region extent according to all tiles and set a course
 resolution (align cells to resolution value):
 
     g.region vector=las_tile_scheme res=10 -a -p
+ 
+ ## Notes on dem_generation folder
+ main.py conatins working code from examples to complete a few different processes, can be used for more than DEM
+ 
+ ## Notes on qsub.sh 
+ View pmf_pipe.json for pipeline specification
+ View pmf directory for output on UIUC data
+ Next step: Parallelization on pdal pipeline 
