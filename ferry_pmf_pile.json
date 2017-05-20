@@ -1,0 +1,28 @@
+{
+        "pipeline": [
+                {
+                "filename":"/projects/isgs/lidar/adams/las_classified/2004_1190.las",
+                "spatialreference": "EPSG:3443"
+                },
+                {
+      "type":"filters.ferry",
+      "dimensions":"Classification = OriginalClassification"
+    },
+                {
+                "type": "filters.pmf",
+                "approximate": true,
+                "max_window_size": 33,
+                "slope": 1.0,
+                "max_distance": 2.5,
+                "initial_distance": 0.15,
+                "cell_size": 1.0
+                },
+                {
+                "type":"filters.range",
+                "limits":"Classification[1:1],Classification[3:]"
+                },
+                {
+                        "type": "writers.text"
+                }
+        ]
+}
