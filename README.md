@@ -47,8 +47,6 @@ resolution (align cells to resolution value):
 
     g.region vector=las_tile_scheme res=10 -a -p
  
- ## Notes on dem_generation folder
- main.py conatins working code from examples to complete a few different processes, can be used for more than DEM
  
  ## Notes on qsub.sh 
  View pmf_pipe.json for pipeline specification
