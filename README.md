@@ -51,4 +51,4 @@ resolution (align cells to resolution value):
  ## Notes on qsub.sh 
  - View `pmf_pipe.json` for pipeline specification
  - View `pmf` directory for output on UIUC data
- - Next step: Parallelization on `pdal pipeline` 
+ - Next step: Parallelization on `pdal pipeline`, application to larger dataset
