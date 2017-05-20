@@ -46,8 +46,13 @@ Set a computation region extent according to all tiles and set a course
 resolution (align cells to resolution value):
 
     g.region vector=las_tile_scheme res=10 -a -p
- 
- 
+
+Use uiuc_las_to_grass.sh or its modifications to submit larger jobs,
+but the import of one tile can but just done in the command line,
+for example:
+
+    r.in.lidar input=/projects/.../10121256.las output=buildings_tile_10121256 -e res=3
+
  ## Notes on qsub.sh 
  - View `pmf_pipe.json` for pipeline specification
  - View `pmf` directory for output on UIUC data
