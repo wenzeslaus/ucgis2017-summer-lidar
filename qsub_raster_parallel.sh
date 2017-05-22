@@ -31,7 +31,7 @@ cd $TMP_DIR
 #lasfiles = $inputDir/*.las
 
 #parallel [options] [command [arguments]] < list_of_arguments
-parallel 'pdal pipeline $PIPELINE --readers.las.filename="{}" --writers.gdal.filename="{.}.tif"' ::: $INPUT_DIR/*.las
+parallel 'pdal pipeline $PIPELINE --readers.las.filename="{}" --writers.gdal.filename="{/.}.tif"' ::: $INPUT_DIR/*.las
 
 #for file in "$inputDir"/*.las;
 #do
