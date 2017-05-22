@@ -7,7 +7,13 @@
 # footprints (i.e. it is NULL when point is not a classified as building)
 
 POINTS=classified
+TILE=tile
 
-echo "TP = " `db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NOT NULL AND class_building_cat IS NOT NULL" -c`
-echo "FP = " `db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NULL AND class_building_cat IS NOT NULL" -c`
-echo "AL = " `db.select "SELECT count(cat) FROM $POINTS WHERE class_building_cat IS NOT NULL" -c`
+TP=`db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NOT NULL AND class_building_cat IS NOT NULL" -c`
+FP=`db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NULL AND class_building_cat IS NOT NULL" -c`
+AL=`db.select "SELECT count(cat) FROM $POINTS WHERE class_building_cat IS NOT NULL" -c`
+
+v.db.addcolumn $POINT columns="TP INTEGER,FP INTEGER,ALL INTEGER"
+v.db.update $POINT column=TP value=$TP
+v.db.update $POINT column=FP value=$FP
+v.db.update $POINT column=ALL value=$AL
