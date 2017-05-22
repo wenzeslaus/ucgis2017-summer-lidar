@@ -9,7 +9,7 @@
 # number of cpus
 #PBS -l nodes=1:ppn=20
 # anticipated run-time
-#PBS -l walltime=1:00:00
+#PBS -l walltime=0:20:00
 
 module load pdal
 module load parallel
