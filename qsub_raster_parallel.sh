@@ -1,16 +1,14 @@
 #!/bin/sh
 
-### Set the job name
-#PBS -N lidar
-### Use the bourne shell
+# job name
+#PBS -N ucgis_lidar
+# use the bourne shell
 #PBS -S /bin/bash
-### To send email when the job is completed: be --- before execution ae 
-### --- after execution
-#PBS -m ae PBS -M hathcock@gri.msstate.edu
-### Specify the number of cpus for your job.
+# send email after execution
+#PBS -m ae PBS -M vpetras@ncsu.edu
+# number of cpus
 #PBS -l nodes=1:ppn=20
-### Tell PBS the anticipated run-time for your job, where 
-### walltime=HH:MM:SS
+# anticipated run-time
 #PBS -l walltime=0:05:00
 
 module load pdal
