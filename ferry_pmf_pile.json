@@ -14,7 +14,7 @@
                 "max_window_size": 33,
                 "slope": 1.0,
                 "max_distance": 2.5,
-                "initial_distance": 0.15,
+                "initial_distance": 1.0,
                 "cell_size": 1.0
                 },
                 {
