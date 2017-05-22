@@ -17,6 +17,6 @@ v.colors map=tiles_precision_colortable use=attr column=precision color=viridis
 v.db.select tiles sep=tab columns=cat,TP,FP,precision > precision_table.txt
 
 echo "Precision:" > precision_agg.txt
-db.select sql="SELECT SUM(TP) / (1.0 * SUM(TP) + SUM(FP)) FROM tiles WHERE TP <> 0 AND name NOT LIKE '%10141256%'" >> precision_agg.txt
+db.select sql="SELECT SUM(TP) / (1.0 * SUM(TP) + SUM(FP)) FROM tiles WHERE TP <> 0 AND name NOT LIKE '%10141256%'" -c >> precision_agg.txt
 echo "Branch factor:" >> precision_agg.txt
-db.select sql="SELECT SUM(FP) / (1.0 * SUM(TP) + SUM(FP)) FROM tiles WHERE TP <> 0 AND name NOT LIKE '%10141256%'" >> precision_agg.txt
+db.select sql="SELECT SUM(FP) / (1.0 * SUM(TP) + SUM(FP)) FROM tiles WHERE TP <> 0 AND name NOT LIKE '%10141256%'" -c >> precision_agg.txt
