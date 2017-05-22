@@ -19,7 +19,8 @@ module load grass
 UCGIS_DIR=/projects/ucgis/OpenProblems/data/CyberGISandGeospatialDataScience/DataQualityAndUncertainty
 INPUT_DIR=$UCGIS_DIR/data/UIUC/
 TMP_DIR=$UCGIS_DIR/outputs/tmp2/
-GRASS_LOCATION=$UCGIS_DIR/outputs/grassdata/illinois_ft
+
+export GRASS_LOCATION=$UCGIS_DIR/outputs/grassdata/illinois_ft
 
 export SCRIPTS_DIR=$HOME/scripts/ucgis2017-summer-lidar
 export PIPELINE=$SCRIPTS_DIR/ferry_pmf_pile.json
@@ -42,7 +43,7 @@ function classify {
 
     las2las -i $INPUT_POINTS -o $TMP_POINTS --last-return-only
     pdal pipeline $PIPELINE --readers.las.filename="$TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
-    grass72 $GRASS_LOCATION/$TMP_MAPSET -c
+    grass72 -c $GRASS_LOCATION/$TMP_MAPSET
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_grass.sh $OUTPUT_POINTS
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_footprints.sh
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/footprints_to_points.sh
