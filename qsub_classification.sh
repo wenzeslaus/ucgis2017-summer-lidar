@@ -9,7 +9,7 @@
 # number of cpus
 #PBS -l nodes=1:ppn=20
 # anticipated run-time
-#PBS -l walltime=0:20:00
+#PBS -l walltime=0:10:00
 
 module load pdal
 module load parallel
@@ -56,3 +56,6 @@ function classify {
 export -f classify
 
 parallel 'classify {}' ::: $INPUT_DIR/*.las
+
+grass72 -e -c $GRASS_LOCATION/$TMP_MAPSET
+grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/patch_results.sh
