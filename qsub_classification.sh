@@ -17,7 +17,7 @@ module load liblas
 
 UCGIS_DIR=/projects/ucgis/OpenProblems/data/CyberGISandGeospatialDataScience/DataQualityAndUncertainty
 INPUT_DIR=$UCGIS_DIR/data/UIUC/
-TMP_DIR=$UCGIS_DIR/outputs/tmp/
+TMP_DIR=$UCGIS_DIR/outputs/tmp2/
 
 export PIPELINE=$HOME/scripts/ucgis2017-summer-lidar/ferry_pmf_pile.json
 
