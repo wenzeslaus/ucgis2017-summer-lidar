@@ -7,7 +7,8 @@
 # it also expect the computational region to be set to desired area
 
 # required module from GRASS GIS Addons repository
-g.extension r.area
+# install this ahead
+# g.extension r.area
 
 INPUT=classified
 
