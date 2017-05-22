@@ -30,4 +30,15 @@ cd $TMP_DIR
 
 #lasfiles = $inputDir/*.las
 
-parallel 'pdal pipeline $PIPELINE --readers.las.filename="{}" --writers.las.filename="{/.}.las"' ::: $INPUT_DIR/*.las
+function classify {
+    INPUT_POINTS=${1}
+    BASE_POINTS=`basename .s las ${1}`
+    OUTPUT_POINTS="$BASE_POINTS.las"
+    TMP_POINTS="last_only_$BASE_POINTS.las"
+
+    las2las -i $INPUT_POINTS -o $TMP_POINTS --last-return-only
+    pdal pipeline $PIPELINE --readers.las.filename="TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
+}
+export -f classify
+
+parallel 'classify {}' ::: $INPUT_DIR/*.las
