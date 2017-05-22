@@ -57,5 +57,6 @@ export -f classify
 
 parallel 'classify {}' ::: $INPUT_DIR/*.las
 
-grass72 -e -c $GRASS_LOCATION/$TMP_MAPSET
-grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/patch_results.sh
+AGG_MAPSET=agg
+grass72 -e -c $GRASS_LOCATION/$AGG_MAPSET
+grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh
