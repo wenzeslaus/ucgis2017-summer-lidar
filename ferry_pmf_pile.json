@@ -22,7 +22,7 @@
                 "limits":"Classification[1:1],Classification[3:]"
                 },
                 {
-                        "type": "writers.text"
+                        "type": "writers.las"
                 }
         ]
 }
