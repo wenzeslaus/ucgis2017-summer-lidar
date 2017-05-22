@@ -13,7 +13,7 @@ TP=`db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NOT NULL AND 
 FP=`db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NULL AND class_building_cat IS NOT NULL" -c`
 AL=`db.select "SELECT count(cat) FROM $POINTS WHERE class_building_cat IS NOT NULL" -c`
 
-v.db.addcolumn $POINT columns="TP INTEGER,FP INTEGER,ALL INTEGER"
-v.db.update $POINT column=TP value=$TP
-v.db.update $POINT column=FP value=$FP
-v.db.update $POINT column=ALL value=$AL
+v.db.addcolumn map=$POINTS columns="TP INTEGER,FP INTEGER,ALL INTEGER"
+v.db.update $POINTS column=TP value=$TP
+v.db.update $POINTS column=FP value=$FP
+v.db.update $POINTS column=ALL value=$AL
