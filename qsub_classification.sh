@@ -32,7 +32,7 @@ cd $TMP_DIR
 
 function classify {
     INPUT_POINTS=${1}
-    BASE_POINTS=`basename -s las ${1}`
+    BASE_POINTS=`basename ${1} .las`
     OUTPUT_POINTS="$BASE_POINTS.las"
     TMP_POINTS="last_only_$BASE_POINTS.las"
 
