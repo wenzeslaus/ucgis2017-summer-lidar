@@ -9,7 +9,9 @@
 # required module from GRASS GIS Addons repository
 g.extension r.area
 
-r.mapcalc "presence = if(isnull(after_ferry_classified_10121256), null(), 1)"
+INPUT=classified
+
+r.mapcalc "presence = if(isnull($INPUT), null(), 1)"
 
 r.clump presence out=clump
 

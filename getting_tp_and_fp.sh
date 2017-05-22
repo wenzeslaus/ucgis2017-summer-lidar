@@ -6,6 +6,8 @@
 # and class_building_cat column which is NULL when outside of identified
 # footprints (i.e. it is NULL when point is not a classified as building)
 
-echo "Number of TP:" `v.db.select after_ferry_classified_10121256 where="building_id IS NOT NULL AND class_building_cat IS NOT NULL" -c | wc -l`
-echo "Number of FP:" `v.db.select after_ferry_classified_10121256 where="building_id IS NULL AND class_building_cat IS NOT NULL" -c | wc -l`
-echo "Number of all points:" `v.db.select after_ferry_classified_10121256 where="class_building_cat IS NOT NULL" -c | wc -l`
+POINTS=classified
+
+echo "TP = " `db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NOT NULL AND class_building_cat IS NOT NULL" -c`
+echo "FP = " `db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NULL AND class_building_cat IS NOT NULL" -c`
+echo "AL = " `db.select "SELECT count(cat) FROM $POINTS WHERE class_building_cat IS NOT NULL" -c`

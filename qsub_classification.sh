@@ -14,12 +14,15 @@
 module load pdal
 module load parallel
 module load liblas
+module load grass
 
 UCGIS_DIR=/projects/ucgis/OpenProblems/data/CyberGISandGeospatialDataScience/DataQualityAndUncertainty
 INPUT_DIR=$UCGIS_DIR/data/UIUC/
 TMP_DIR=$UCGIS_DIR/outputs/tmp2/
+GRASS_LOCATION=$UCGIS_DIR/outputs/grassdata/illinois_ft
 
-export PIPELINE=$HOME/scripts/ucgis2017-summer-lidar/ferry_pmf_pile.json
+export SCRIPTS_DIR=$HOME/scripts/ucgis2017-summer-lidar
+export PIPELINE=$SCRIPTS_DIR/ferry_pmf_pile.json
 
 if [ ! -d $TMP_DIR ];
 then
@@ -35,9 +38,15 @@ function classify {
     BASE_POINTS=`basename ${1} .las`
     OUTPUT_POINTS="$BASE_POINTS.las"
     TMP_POINTS="last_only_$BASE_POINTS.las"
+    TMP_MAPSET="tmp_$BASE_POINTS"
 
     las2las -i $INPUT_POINTS -o $TMP_POINTS --last-return-only
     pdal pipeline $PIPELINE --readers.las.filename="$TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
+    grass72 $GRASS_LOCATION/$TMP_MAPSET -c
+    grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_grass.sh $OUTPUT_POINTS
+    grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_footprints.sh
+    grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/footprints_to_points.sh
+    grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/getting_tp_and_fp.sh
 }
 export -f classify
 

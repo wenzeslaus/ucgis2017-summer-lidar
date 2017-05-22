@@ -1,10 +1,17 @@
 #!/bin/bash
 
 # this runs in GRASS only (in session or using --exec)
-# assumes after_ferry_classified_10121256 vector
+# assumes points vector, true and detected building footprints
 
-v.db.addcolumn after_ferry_classified_10121256 column="building_id INTEGER"
-v.what.vect map=after_ferry_classified_10121256 col=building_id query_map=OGRGeoJSON query_column=objectid
+POINTS=classified
+TRUE_FOOTPRINTS=true_footprints
+DETECTED_FOOTPRINTS=area
 
-v.db.addcolumn after_ferry_classified_10121256 column="class_building_cat INTEGER"
-v.what.vect map=after_ferry_classified_10121256 col=class_building_cat query_map=area query_column=cat
+TRUE_FOOTPRINT_ID_COL=building_id
+DETECTED_FOOTPRINT_ID_COL=class_building_cat
+
+v.db.addcolumn $POINTS column="$DETECTED_FOOTPRINT_ID_COL INTEGER"
+v.what.vect map=$POINTS col=$DETECTED_FOOTPRINT_ID_COL query_map=$TRUE_FOOTPRINTS query_column=objectid
+
+v.db.addcolumn $POINTS column="$DETECTED_FOOTPRINT_ID_COL INTEGER"
+v.what.vect map=$POINTS col=$DETECTED_FOOTPRINT_ID_COL query_map=$DETECTED_FOOTPRINTS query_column=cat
