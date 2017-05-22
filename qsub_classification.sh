@@ -37,7 +37,7 @@ function classify {
     TMP_POINTS="last_only_$BASE_POINTS.las"
 
     las2las -i $INPUT_POINTS -o $TMP_POINTS --last-return-only
-    pdal pipeline $PIPELINE --readers.las.filename="TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
+    pdal pipeline $PIPELINE --readers.las.filename="$TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
 }
 export -f classify
 
