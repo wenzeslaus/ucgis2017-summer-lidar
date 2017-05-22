@@ -25,6 +25,9 @@ export GRASS_LOCATION=$UCGIS_DIR/outputs/grassdata/illinois_ft
 export SCRIPTS_DIR=$HOME/scripts/ucgis2017-summer-lidar
 export PIPELINE=$SCRIPTS_DIR/ferry_pmf_pile.json
 
+# we overwrite the other data, so we overwrite also GRASS GIS data
+export GRASS_OVERWRITE=1
+
 if [ ! -d $TMP_DIR ];
 then
     mkdir $TMP_DIR
