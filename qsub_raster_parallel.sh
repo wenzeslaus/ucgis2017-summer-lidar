@@ -15,19 +15,23 @@ module load pdal
 module load parallel
 module load liblas
 
-cd $HOME/UIUC/
-tmpDir=$HOME/UIUC/tmp
+UCGIS_DIR=/projects/ucgis/OpenProblems/data/CyberGISandGeospatialDataScience/DataQualityAndUncertainty
+INPUT_DIR=$UCGIS_DIR/data/UIUC/
+TMP_DIR=$UCGIS_DIR/outputs/tmp/
 
-if [ ! -d $tmpDir ];
+export PIPELINE=$HOME/scripts/ucgis2017-summer-lidar/template.json
+
+if [ ! -d $TMP_DIR ];
 then
-	mkdir $tmpDir
+	mkdir $TMP_DIR
 fi
-inputDir="/home/leeh/UIUC"
-json="template.json"
+
+cd $TMP_DIR
+
 #lasfiles = $inputDir/*.las
 
 #parallel [options] [command [arguments]] < list_of_arguments
-parallel 'pdal pipeline template.json --readers.las.filename="{}" --writers.gdal.filename="{.}.tif"' ::: *.las
+parallel 'pdal pipeline $PIPELINE --readers.las.filename="{}" --writers.gdal.filename="{.}.tif"' ::: $INPUT_DIR/*.las
 
 #for file in "$inputDir"/*.las;
 #do
