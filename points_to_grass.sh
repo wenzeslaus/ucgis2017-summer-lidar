@@ -22,4 +22,5 @@ OUTPUT=classified
 # it would be faster and it would align all the rasters
 # but for point-based evaluations it is enough
 
-v.in.lidar input=$INPUT output=classified -e res=9
+r.in.lidar input=$INPUT output=classified -e res=9
+v.in.lidar input=$INPUT output=classified
