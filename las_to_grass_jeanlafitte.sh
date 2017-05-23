@@ -20,6 +20,9 @@ export GRASS_OVERWRITE=1
 grass72 $GRASSMAPSET --exec g.region vector=las_tile_scheme res=10
 
 #parallel --jobs 5 <<EOF
+grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=all_max_10m method=max
+grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=last_max_10m method=max return_filter=last
+grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=mid_max_10m method=max return_filter=mid
 grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=ground_10m class_filter=2
 grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=veg_max_10m method=max class_filter=3,4,5
 grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=density_ground_10m method=n class=2
@@ -30,6 +33,9 @@ grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=
 grass72 $GRASSMAPSET --exec g.region vector=las_tile_scheme res=2
 
 #parallel --jobs 5 <<EOF
+grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=all_max_2m method=max
+grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=last_max_2m method=max return_filter=last
+grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=mid_max_2m method=max return_filter=mid
 grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=ground_2m class_filter=2
 grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=veg_max_2m method=max class_filter=3,4,5
 grass72 $GRASSMAPSET -f --exec r.in.lidar file=las_files_jeanlafitte.txt output=density_ground_2m method=n class=2
