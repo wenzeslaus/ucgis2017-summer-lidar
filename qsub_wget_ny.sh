@@ -12,5 +12,5 @@ export OUTPUT=/projects/ucgis/OpenProblems/data/CyberGISandGeospatialDataScience
 export SCRIPTS_DIR=$HOME/scripts/ucgis2017-summer-lidar
 
 parallel < $SCRIPTS_DIR/wget_ny.sh
-parallel < $SCRIPTS_DIR/uzip_ny.sh
-parallel < $SCRIPTS_DIR/uzip_las_ny.sh
+parallel < $SCRIPTS_DIR/unzip_ny.sh
+parallel < $SCRIPTS_DIR/unzip_las_ny.sh
