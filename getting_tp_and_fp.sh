@@ -9,9 +9,9 @@
 POINTS=classified
 TILE=tile
 
-TP=`db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NOT NULL AND class_building_cat IS NOT NULL" -c`
-FP=`db.select "SELECT count(cat) FROM $POINTS WHERE building_id IS NULL AND class_building_cat IS NOT NULL" -c`
-AL=`db.select "SELECT count(cat) FROM $POINTS WHERE class_building_cat IS NOT NULL" -c`
+TP=`db.select "SELECT count(cat) FROM $POINTS WHERE true_building_id IS NOT NULL AND class_building_id IS NOT NULL" -c`
+FP=`db.select "SELECT count(cat) FROM $POINTS WHERE true_building_id IS NULL AND class_building_id IS NOT NULL" -c`
+AL=`db.select "SELECT count(cat) FROM $POINTS WHERE class_building_id IS NOT NULL" -c`
 
 v.db.addcolumn map=$TILE columns="TP INTEGER,FP INTEGER,AL INTEGER"
 v.db.update $TILE column=TP value=$TP
