@@ -20,6 +20,7 @@ UCGIS_DIR=/projects/ucgis/OpenProblems/data/CyberGISandGeospatialDataScience/Dat
 INPUT_DIR=$UCGIS_DIR/data/UIUC/
 TMP_DIR=$UCGIS_DIR/outputs/tmp2/
 
+# a GRASS GIS location with appropriate CRS
 export GRASS_LOCATION=$UCGIS_DIR/outputs/grassdata/illinois_ft
 
 export SCRIPTS_DIR=$HOME/scripts/ucgis2017-summer-lidar
