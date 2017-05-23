@@ -15,6 +15,8 @@ GRASSMAPSET=$SPACE/outputs/grassdata/jeanlafitte/PERMANENT
 
 find $DATA/*.las > las_files_jeanlafitte.txt
 
+export GRASS_OVERWRITE=1
+
 grass72 $GRASSMAPSET --exec g.region vector=las_tile_scheme res=10
 
 parallel --jobs 5 <<EOF
