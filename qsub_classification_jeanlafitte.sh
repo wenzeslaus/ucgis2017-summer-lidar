@@ -13,8 +13,8 @@
 
 # this is actually 'to'
 # needs to be increased by NUM for every run
-FROM=20
-NUM=40
+export FROM=40
+export NUM=40
 
 module load pdal
 module load parallel
