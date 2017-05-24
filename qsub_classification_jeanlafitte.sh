@@ -23,7 +23,7 @@ TMP_DIR=$UCGIS_DIR/outputs/tmp3/
 export GRASS_LOCATION=$UCGIS_DIR/outputs/grassdata/jeanlafitte/
 
 export SCRIPTS_DIR=$HOME/scripts/ucgis2017-summer-lidar
-export PIPELINE=$SCRIPTS_DIR/ferry_pmf_pile.json
+export PIPELINE=$SCRIPTS_DIR/pfm_pipe_jeanlafitte.json
 
 # we overwrite the other data, so we overwrite also GRASS GIS data
 export GRASS_OVERWRITE=1
