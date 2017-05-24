@@ -10,7 +10,7 @@ module load grass
 module load parallel
 
 SPACE=/projects/ucgis/OpenProblems/data/CyberGISandGeospatialDataScience/DataQualityAndUncertainty/
-DATA=$SPACE/data/ny
+DATA=$SPACE/outputs/ny
 GRASSMAPSET=$SPACE/outputs/grassdata/ny/PERMANENT
 
 LAS_FILE_LIST=las_file_list.txt
@@ -20,7 +20,7 @@ find $DATA/*.las > $LAS_FILE_LIST
 
 export GRASS_OVERWRITE=1
 
-grass72 $GRASSMAPSET --exec g.region vector=las_tile_scheme res=10
+grass72 $GRASSMAPSET --exec g.region vector=las_tile_scheme res=10 -a
 
 grass72 $GRASSMAPSET -f --exec parallel --jobs $JOBS <<EOF
 r.in.lidar file=$LAS_FILE_LIST output=all_max_10m method=max
@@ -33,7 +33,7 @@ r.in.lidar file=$LAS_FILE_LIST output=density_all_10m method=n
 r.in.lidar file=$LAS_FILE_LIST output=density_veg_10m method=n class_filter=3,4,5
 EOF
 
-grass72 $GRASSMAPSET --exec g.region vector=las_tile_scheme res=2
+grass72 $GRASSMAPSET --exec g.region vector=las_tile_scheme res=2 -a
 
 grass72 $GRASSMAPSET -f --exec parallel --jobs $JOBS <<EOF
 r.in.lidar file=$LAS_FILE_LIST output=all_max_2m method=max
