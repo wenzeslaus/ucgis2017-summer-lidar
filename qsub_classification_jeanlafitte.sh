@@ -54,6 +54,7 @@ function classify {
     grass72 -e -c $GRASS_LOCATION/$TMP_MAPSET
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/set_region.sh $BASE_POINTS
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_grass.sh $OUTPUT_POINTS
+    grass72 $GRASS_LOCATION/$TMP_MAPSET --exec g.region res=1 -a
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_footprints.sh
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/footprints_to_points.sh
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/getting_tp_and_fp.sh
