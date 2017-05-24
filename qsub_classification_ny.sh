@@ -7,9 +7,9 @@
 # send email after execution
 #PBS -m ae PBS -M vpetras@ncsu.edu
 # number of cpus
-#PBS -l nodes=1:ppn=20
+#PBS -l nodes=2:ppn=20
 # anticipated run-time
-#PBS -l walltime=5:00:00
+#PBS -l walltime=2:00:00
 
 module load pdal
 module load parallel
@@ -57,8 +57,11 @@ function classify {
 }
 export -f classify
 
-ls $INPUT_DIR/*.las  | head -n 100 | tail -n 20 | parallel 'classify {}'
+FROM=200
+NUM=40
 
-AGG_MAPSET=agg
+ls $INPUT_DIR/*.las  | head -n $FROM | tail -n $NUM | parallel 'classify {}'
+
+AGG_MAPSET=agg_${FROM}_${NUM}
 grass72 -e -c $GRASS_LOCATION/$AGG_MAPSET
 grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh
