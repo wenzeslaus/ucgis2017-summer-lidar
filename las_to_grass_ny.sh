@@ -44,4 +44,4 @@ r.in.lidar file=$LAS_FILE_LIST output=veg_max_2m method=max class_filter=3,4,5
 r.in.lidar file=$LAS_FILE_LIST output=density_ground_2m method=n class=2
 r.in.lidar file=$LAS_FILE_LIST output=density_all_2m method=n
 r.in.lidar file=$LAS_FILE_LIST output=density_veg_2m method=n class_filter=3,4,5
-#EOF
+EOF
