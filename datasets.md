@@ -16,6 +16,8 @@ Size: 14GB
 
 Number of tiles: 125
 
+Representative tile: LA_Jean-Lafitte_2013_000036.las
+
 ## UIUC
 
 EPSG:3443
