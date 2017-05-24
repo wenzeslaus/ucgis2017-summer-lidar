@@ -11,10 +11,10 @@
                 "type": "filters.pmf",
                 "approximate": true,
                 "max_window_size": 33,
-                "slope": 1.0,
-                "max_distance": 5.0,
-                "initial_distance": 1.5,
-                "cell_size": 0.5
+                "slope": 0.5,
+                "max_distance": 2.0,
+                "initial_distance": 0.5,
+                "cell_size": 0.25
                 },
                 {
                 "type":"filters.range",
