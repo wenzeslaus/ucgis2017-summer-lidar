@@ -7,12 +7,14 @@
 # send email after execution
 #PBS -m ae PBS -M vpetras@ncsu.edu
 # number of cpus
-#PBS -l nodes=2:ppn=20
+#PBS -l nodes=4:ppn=20
 # anticipated run-time
-#PBS -l walltime=2:00:00
+#PBS -l walltime=4:00:00
 
-FROM=320
-NUM=40
+# this is actually 'to'
+# needs to be increased by NUM for every run
+export FROM=1000
+export NUM=1000
 
 module load pdal
 module load parallel
@@ -46,14 +48,14 @@ function classify {
     BASE_POINTS=`basename ${1} .las`
     OUTPUT_POINTS="$BASE_POINTS.las"
     TMP_POINTS="last_only_$BASE_POINTS.las"
-    TMP_MAPSET="tmp_${FROM}_${NUM}_$BASE_POINTS"
+    TMP_MAPSET="batch_tmp_${FROM}_${NUM}_$BASE_POINTS"
 
     las2las -i $INPUT_POINTS -o $TMP_POINTS --last-return-only
     pdal pipeline $PIPELINE --readers.las.filename="$TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
     grass72 -e -c $GRASS_LOCATION/$TMP_MAPSET
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/set_region.sh $BASE_POINTS
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_grass.sh $OUTPUT_POINTS
-    grass72 $GRASS_LOCATION/$TMP_MAPSET --exec g.region res=1
+    grass72 $GRASS_LOCATION/$TMP_MAPSET --exec g.region res=1 -a
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/points_to_footprints.sh
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/footprints_to_points.sh
     grass72 $GRASS_LOCATION/$TMP_MAPSET --exec $SCRIPTS_DIR/getting_tp_and_fp.sh
@@ -62,6 +64,6 @@ export -f classify
 
 ls $INPUT_DIR/*.las  | head -n $FROM | tail -n $NUM | parallel 'classify {}'
 
-AGG_MAPSET=agg_${FROM}_${NUM}
+AGG_MAPSET=batch_agg_${FROM}_${NUM}
 grass72 -e -c $GRASS_LOCATION/$AGG_MAPSET
-grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh tmp_${FROM}_${NUM}_
+grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh batch_tmp_${FROM}_${NUM}_
