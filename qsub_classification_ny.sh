@@ -9,7 +9,7 @@
 # number of cpus
 #PBS -l nodes=1:ppn=20
 # anticipated run-time
-#PBS -l walltime=0:30:00
+#PBS -l walltime=0:10:00
 
 module load pdal
 module load parallel
@@ -57,7 +57,7 @@ function classify {
 }
 export -f classify
 
-parallel 'classify {}' ::: $INPUT_DIR/18TWL940***.las
+ls $INPUT_DIR/*.las  | head -n 20 | tail -n 1 | parallel 'classify {}'
 
 AGG_MAPSET=agg
 grass72 -e -c $GRASS_LOCATION/$AGG_MAPSET
