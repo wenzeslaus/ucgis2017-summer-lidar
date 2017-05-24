@@ -7,9 +7,9 @@
 # send email after execution
 #PBS -m ae PBS -M vpetras@ncsu.edu
 # number of cpus
-#PBS -l nodes=4:ppn=20
+#PBS -l nodes=1:ppn=20
 # anticipated run-time
-#PBS -l walltime=4:00:00
+#PBS -l walltime=3:00:00
 
 # this is actually 'to'
 # needs to be increased by NUM for every run
@@ -62,7 +62,9 @@ function classify {
 }
 export -f classify
 
-ls $INPUT_DIR/*.las  | head -n $FROM | tail -n $NUM | parallel 'classify {}'
+ls $INPUT_DIR/18TWL955060.las $INPUT_DIR/18TWL955045.las $INPUT_DIR/18TWL940045.las \
+    $INPUT_DIR/18TWL925045.las $INPUT_DIR/18TWL925060.las \
+    $INPUT_DIR/18TWL940060.las | head -n $FROM | tail -n $NUM | parallel 'classify {}'
 
 AGG_MAPSET=batch_agg_${FROM}_${NUM}
 grass72 -e -c $GRASS_LOCATION/$AGG_MAPSET
