@@ -44,8 +44,26 @@ Problematic files:
 
     USGS_LPC_NM_WhiteSands_2015_13SCS880380_LAS_2017.las (PDAL fails with bad alloc)
 
+## NY
+
+EPSG:26918
+NAD83 / UTM zone 18N
+http://epsg.io/26918
+
+Size: 125GB
+
+Number of tiles: 529
+
+Number of points: 4,766,416,638
+
+Representative tile: 18TWL940060.las
+
 ## Notes
 
 To obtain the size of the directories use
 
     du -h /path/to/parent/directory
+
+Count only LAS files and sum the result:
+
+    du -h ny/*.las -c
