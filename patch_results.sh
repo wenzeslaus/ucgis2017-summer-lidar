@@ -3,9 +3,19 @@
 # this runs in GRASS only (in session or using --exec)
 # expects mapsets with maps with same names
 
-v.patch in=`g.list mapset='*' type=vector pattern="area" -m sep=comma` out=areas
+if [ -z "$1" ]
+then
+    >&2 echo "No argument supplied"
+    >&2 echo "Usage:"
+    >&2 echo "  $0 mapset_pattern"
+    exit 1
+fi
 
-v.patch in=`g.list mapset='*' type=vector pattern="tile" -m sep=comma` out=tiles -e
+MAPSET=${1}
+
+v.patch in=`g.list mapset='*' type=vector pattern="area" -m sep=comma | grep $MAPSET` out=areas
+
+v.patch in=`g.list mapset='*' type=vector pattern="tile" -m sep=comma | grep $MAPSET` out=tiles -e
 
 v.db.addcolumn tiles columns="BF DOUBLE, precision DOUBLE"
 v.db.update map=tiles column=BF query_column="FP / (1.0 * TP + FP)"

@@ -11,6 +11,9 @@
 # anticipated run-time
 #PBS -l walltime=2:00:00
 
+FROM=320
+NUM=40
+
 module load pdal
 module load parallel
 module load liblas
@@ -43,7 +46,7 @@ function classify {
     BASE_POINTS=`basename ${1} .las`
     OUTPUT_POINTS="$BASE_POINTS.las"
     TMP_POINTS="last_only_$BASE_POINTS.las"
-    TMP_MAPSET="tmp_$BASE_POINTS"
+    TMP_MAPSET="tmp_${FROM}_${NUM}_$BASE_POINTS"
 
     las2las -i $INPUT_POINTS -o $TMP_POINTS --last-return-only
     pdal pipeline $PIPELINE --readers.las.filename="$TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
@@ -57,11 +60,8 @@ function classify {
 }
 export -f classify
 
-FROM=200
-NUM=40
-
 ls $INPUT_DIR/*.las  | head -n $FROM | tail -n $NUM | parallel 'classify {}'
 
 AGG_MAPSET=agg_${FROM}_${NUM}
 grass72 -e -c $GRASS_LOCATION/$AGG_MAPSET
-grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh
+grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh tmp_${FROM}_${NUM}_
