@@ -48,7 +48,7 @@ function classify {
     BASE_POINTS=`basename ${1} .las`
     OUTPUT_POINTS="$BASE_POINTS.las"
     TMP_POINTS="last_only_$BASE_POINTS.las"
-    TMP_MAPSET="batch_tmp_${FROM}_${NUM}_$BASE_POINTS"
+    TMP_MAPSET="fast_batch_tmp_${FROM}_${NUM}_$BASE_POINTS"
 
     las2las -i $INPUT_POINTS -o $TMP_POINTS --last-return-only
     pdal pipeline $PIPELINE --readers.las.filename="$TMP_POINTS" --writers.las.filename="$OUTPUT_POINTS"
@@ -66,6 +66,6 @@ ls $INPUT_DIR/18TWL955060.las $INPUT_DIR/18TWL955045.las $INPUT_DIR/18TWL940045.
     $INPUT_DIR/18TWL925045.las $INPUT_DIR/18TWL925060.las \
     $INPUT_DIR/18TWL940060.las | head -n $FROM | tail -n $NUM | parallel 'classify {}'
 
-AGG_MAPSET=batch_agg_${FROM}_${NUM}
+AGG_MAPSET=fast_batch_agg_${FROM}_${NUM}
 grass72 -e -c $GRASS_LOCATION/$AGG_MAPSET
-grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh batch_tmp_${FROM}_${NUM}_
+grass72 $GRASS_LOCATION/$AGG_MAPSET --exec $SCRIPTS_DIR/patch_results.sh fast_batch_tmp_${FROM}_${NUM}_
