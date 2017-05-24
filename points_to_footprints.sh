@@ -16,7 +16,7 @@ r.mapcalc "presence = if(isnull($INPUT), null(), 1)"
 
 r.clump presence out=clump
 
-r.area in=clump out=area lesser=20
+r.area in=clump out=area lesser=20 greater=100000 -b
 
 r.colors area color=random
 
