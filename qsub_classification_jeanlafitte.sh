@@ -7,14 +7,14 @@
 # send email after execution
 #PBS -m ae PBS -M vpetras@ncsu.edu
 # number of cpus
-#PBS -l nodes=2:ppn=20
+#PBS -l nodes=4:ppn=20
 # anticipated run-time
-#PBS -l walltime=1:00:00
+#PBS -l walltime=4:00:00
 
 # this is actually 'to'
 # needs to be increased by NUM for every run
-export FROM=40
-export NUM=40
+export FROM=1000
+export NUM=1000
 
 module load pdal
 module load parallel
