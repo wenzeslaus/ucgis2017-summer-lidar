@@ -14,9 +14,9 @@ then
     MAPSET="tmp_"
 fi
 
-v.patch in=`g.list mapset='*' type=vector pattern="area" -m sep=comma | grep $MAPSET` out=areas
+v.patch in=`g.list mapset='*' type=vector pattern="area" -m sep=newline | grep $MAPSET | paste -s -d ','` out=areas
 
-v.patch in=`g.list mapset='*' type=vector pattern="tile" -m sep=comma | grep $MAPSET` out=tiles -e
+v.patch in=`g.list mapset='*' type=vector pattern="tile" -m sep=newline | grep $MAPSET | paste -s -d ','` out=tiles -e
 
 v.db.addcolumn tiles columns="BF DOUBLE, precision DOUBLE"
 v.db.update map=tiles column=BF query_column="FP / (1.0 * TP + FP)"
