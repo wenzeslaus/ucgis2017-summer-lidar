@@ -3,15 +3,16 @@
 # this runs in GRASS only (in session or using --exec)
 # expects mapsets with maps with same names
 
+MAPSET=${1}
+
 if [ -z "$1" ]
 then
     >&2 echo "No argument supplied"
     >&2 echo "Usage:"
     >&2 echo "  $0 mapset_pattern"
-    exit 1
+    #exit 1
+    MAPSET="tmp_"
 fi
-
-MAPSET=${1}
 
 v.patch in=`g.list mapset='*' type=vector pattern="area" -m sep=comma | grep $MAPSET` out=areas
 
