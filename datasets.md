@@ -56,7 +56,9 @@ Number of tiles: 529
 
 Number of points: 4,766,416,638
 
-Representative tile: 18TWL940060.las
+Representative tiles:
+18TWL940060.las
+18TWL835000.las
 
 ## Notes
 
