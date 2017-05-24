@@ -9,7 +9,7 @@
 # number of cpus
 #PBS -l nodes=4:ppn=20
 # anticipated run-time
-#PBS -l walltime=1:00:00
+#PBS -l walltime=3:00:00
 
 # this is actually 'to'
 # needs to be increased by NUM for every run
